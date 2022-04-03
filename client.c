@@ -1,27 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmillon <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/03 23:06:15 by gmillon           #+#    #+#             */
+/*   Updated: 2022/04/03 23:33:59 by gmillon          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
 int transmit_char(char c, int serverpid)
 {
 	int	i;
-
+	char a = 0;
 	i = 7;
 
 	while (i >=0 )
 	{
 		if (check_bit(&c, i))
 		{
-			// printf("%d", check_bit(&c, i));
+			printf("%d", check_bit(&c, i));
 			kill(serverpid, SIGUSR1);
+			// set_bit(&a, i);
 		}
 		else
 		{
-			
-			// printf("%d", check_bit(&c, i));
+			printf("%d", check_bit(&c, i));
 			kill(serverpid, SIGUSR2);
 		}
 		i--;
+		usleep(1);
 	}
 	printf("\n");
+	return (1);
 }
 
 int main(int argc, char **argv)
