@@ -6,7 +6,7 @@
 /*   By: gmillon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 23:06:15 by gmillon           #+#    #+#             */
-/*   Updated: 2022/04/04 02:36:21 by gmillon          ###   ########.fr       */
+/*   Updated: 2022/04/04 18:15:58 by gmillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,24 @@
 int transmit_char(char c, int serverpid)
 {
 	int	i;
-	char a = 0;
 	i = 7;
 
 	while (i >=0 )
 	{
 		if (check_bit(&c, i))
 		{
-			// printf("%d", check_bit(&c, i));
+			ft_putnbr_fd(check_bit(&c, i), 1);
 			kill(serverpid, SIGUSR1);
-			// set_bit(&a, i);
 		}
 		else
 		{
-			// printf("%d", check_bit(&c, i));
+			ft_putnbr_fd(check_bit(&c, i), 1);
 			kill(serverpid, SIGUSR2);
 		}
 		i--;
 		usleep(100);
 	}
+	write(1, "\n", 1);
 	return (1);
 }
 
@@ -54,5 +53,12 @@ int main(int argc, char **argv)
 		usleep(1000);
 		i++;
 	}
-	transmit_char(255, serverpid);
+	// while (i <= 254)
+	// {
+	// 	transmit_char(i, serverpid);
+	// 	usleep(1000);
+	// 	i++;
+	// }
+	transmit_char(0, serverpid);
+	transmit_char(0, serverpid);
 }

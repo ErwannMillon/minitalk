@@ -6,7 +6,7 @@
 /*   By: gmillon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 23:06:18 by gmillon           #+#    #+#             */
-/*   Updated: 2022/04/03 23:06:22 by gmillon          ###   ########.fr       */
+/*   Updated: 2022/04/04 17:57:57 by gmillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	set_bit(char *c, int n)
 {
-	*c |= 1 << n;
+	*c |= (char)1 << n;
 }
 
 void	clear_bit(char *c, int n)
 {
-	*c &= ~(1 << n);
+	*c &= ~((char)1 << n);
 }
 
 int		check_bit(char *c, int n)
