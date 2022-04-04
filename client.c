@@ -6,7 +6,7 @@
 /*   By: gmillon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 23:06:15 by gmillon           #+#    #+#             */
-/*   Updated: 2022/04/03 23:33:59 by gmillon          ###   ########.fr       */
+/*   Updated: 2022/04/04 02:36:21 by gmillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,18 @@ int transmit_char(char c, int serverpid)
 	{
 		if (check_bit(&c, i))
 		{
-			printf("%d", check_bit(&c, i));
+			// printf("%d", check_bit(&c, i));
 			kill(serverpid, SIGUSR1);
 			// set_bit(&a, i);
 		}
 		else
 		{
-			printf("%d", check_bit(&c, i));
+			// printf("%d", check_bit(&c, i));
 			kill(serverpid, SIGUSR2);
 		}
 		i--;
-		usleep(1);
+		usleep(100);
 	}
-	printf("\n");
 	return (1);
 }
 
@@ -47,11 +46,13 @@ int main(int argc, char **argv)
 	i = 0;
 	if (argc != 3)
 		return(printf("Invalid number of arguments"));
-	transmitstr = argv[2];
-	serverpid = atoi(argv[1]);
+	transmitstr = argv[1];
+	serverpid = atoi(argv[2]);
 	while (transmitstr[i])
 	{
 		transmit_char(transmitstr[i], serverpid);
+		usleep(1000);
 		i++;
 	}
+	transmit_char(255, serverpid);
 }

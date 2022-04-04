@@ -6,12 +6,13 @@ SERVERSRC = server.c
 SERVEROBJ = $(SERVERSRC:%.c=%.o)
 
 %.o:%.c
-	gcc -c $^ 
+	gcc -ggdb -fsanitize=address -c $^ -L. -lft
 client: $(CLIENTOBJ) $(UOBJS)
-	gcc $(CLIENTOBJ) $(UOBJS) libft.a -o client 
+	gcc -ggdb -fsanitize=address $(CLIENTOBJ) $(UOBJS) -L. -lft -o client 
 server: $(SERVEROBJ) $(UOBJS) 
-	gcc $(SERVEROBJ) $(UOBJS) libft.a -o server 
+	gcc -ggdb -fsanitize=address $(SERVEROBJ) $(UOBJS) -L. -lft -o server 
 all: client server
+	# ./server
 clean:
 	rm -f $(UOBJS) $(CLIENTOBJ) $(SERVEROBJ)
 fclean: clean
