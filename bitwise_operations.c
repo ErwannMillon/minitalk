@@ -6,23 +6,23 @@
 /*   By: gmillon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 23:06:18 by gmillon           #+#    #+#             */
-/*   Updated: 2022/04/03 23:06:22 by gmillon          ###   ########.fr       */
+/*   Updated: 2022/04/05 22:42:31 by gmillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	set_bit(char *c, int n)
+void	set_bit(int *c, int n)
 {
 	*c |= 1 << n;
 }
 
-void	clear_bit(char *c, int n)
+void	clear_bit(int *c, int n)
 {
 	*c &= ~(1 << n);
 }
 
-int		check_bit(char *c, int n)
+int		check_bit(int *c, int n)
 {
 	int	x;
 	x = (*c >> n) & 1U;

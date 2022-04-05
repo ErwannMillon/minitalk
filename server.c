@@ -6,39 +6,19 @@
 /*   By: gmillon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 23:05:53 by gmillon           #+#    #+#             */
-/*   Updated: 2022/04/04 02:51:33 by gmillon          ###   ########.fr       */
+/*   Updated: 2022/04/05 23:17:48 by gmillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-char *g_str;
 
-char	*buf_alloc(char *old)
-{
-	char		*new;
-	static int	size = 10;
-	int			i;
 
-	i = 0;
-	size += 1;
-	new = malloc(size + 2);
-	if (!new)
-		return (NULL);
-	while (old[i])
-	{
-		new[i] = old[i];
-		i++;
-	}
-	new[i] = 0;
-	free(old);
-	return (new);
-}
 
 void receive_char(int signum, siginfo_t *info, void *ucontext)
 {
 	static int	counter = 0;
 	static int	i = 7;
-	static unsigned char c = 0;
+	static int c = 0;
 	// write(1, "Signal number\n", 15);
 	// ft_putnbr_fd(info->si_signo, 1);
 	if (signum == SIGUSR1)
@@ -50,48 +30,35 @@ void receive_char(int signum, siginfo_t *info, void *ucontext)
 	{
 		// write(1, "0", 1);
 	}
+	// ft_putstr_fd("i:   ", 1);
+	// ft_putnbr_fd(i, 1);
+	// ft_putstr_fd("\n", 1);
 	i--;
-	if (i == -1)
+	if (i == -1 && c != 255)
 	{
 		ft_putchar_fd(c, 1);
 		i = 7;
 		c = 0;
+		usleep(1000);
+		kill(info->si_pid, SIGUSR1);
 	}
 	if (c == 255)
 	{
-		// g_str[counter] = 0;
-		// write(1, g_str, counter);
-		// free(g_str);
-		// g_str = malloc(10);
-		// g_str[0] = 0;
-		i = 7;
-		// counter = 0;
-		c = 0;
-	}
-	if (i == -1 && c != 255)
-	{
-		// write(1, "CHAR RECEIVED\n", 15);
-		// write(1, &c, 1);
-		// g_str[counter] = c;
-		// counter++;
-		// g_str[counter] = 0;
-		// g_str = buf_alloc(g_str);
 		i = 7;
 		c = 0;
+		kill(info->si_pid, SIGUSR2);
+
 	}
 	// if (counter >= 2)
 	// 	printf("STRING: %s\n", g_str);
-}
-int	receive_str()
-{
+	usleep(1000);
+	kill(info->si_pid, SIGUSR1);
 
-	pause();
 }
+
 
 int main(void)
 {
-	g_str = malloc(10);
-	g_str[0] = 0;
 	int i = 0;
 	sigset_t	set;
 	struct sigaction newaction;
@@ -105,6 +72,7 @@ int main(void)
 	sigaction(SIGUSR2, &newaction, NULL);
 	long long unsigned int pid = getpid();
 	ft_putnbr_fd(pid, 1);
+	printf("\n");
 	while (1)
 	{
 		i = 0;
