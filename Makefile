@@ -12,7 +12,7 @@ client: $(CLIENTOBJ) $(UOBJS)
 server: $(SERVEROBJ) $(UOBJS) 
 	gcc -ggdb -fsanitize=address $(SERVEROBJ) $(UOBJS) -L. -lft -o server 
 all: client server
-	./server
+	# ./server
 clean:
 	rm -f $(UOBJS) $(CLIENTOBJ) $(SERVEROBJ)
 fclean: clean
