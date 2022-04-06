@@ -6,19 +6,38 @@
 /*   By: gmillon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 23:05:53 by gmillon           #+#    #+#             */
-/*   Updated: 2022/04/05 23:17:48 by gmillon          ###   ########.fr       */
+/*   Updated: 2022/04/06 08:48:23 by gmillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
 
+char	*buf_alloc(char *old)
+{
+	char		*new;
+	static int	size = 1005;
+	
+	if (!old)
+	{
+		size = 1005;
+		old = malloc(1005);
+		return (old);
+	}
+	size += 1005;
+	new = malloc(size);
+	ft_memcpy(new, old, size - 4);
+	free(old);
+	return(new);
+}
 
 void receive_char(int signum, siginfo_t *info, void *ucontext)
 {
 	static int	counter = 0;
 	static int	i = 7;
 	static int c = 0;
+	static char	*str = NULL;
+
 	// write(1, "Signal number\n", 15);
 	// ft_putnbr_fd(info->si_signo, 1);
 	if (signum == SIGUSR1)
@@ -47,7 +66,8 @@ void receive_char(int signum, siginfo_t *info, void *ucontext)
 		i = 7;
 		c = 0;
 		kill(info->si_pid, SIGUSR2);
-
+		free(str);
+		str = NULL;
 	}
 	// if (counter >= 2)
 	// 	printf("STRING: %s\n", g_str);

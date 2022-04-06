@@ -7,15 +7,15 @@ SERVEROBJ = $(SERVERSRC:%.c=%.o)
 HEADERS = $(wildcard *.h)
 
 %.o:%.c
-	gcc -ggdb -fsanitize=address -c $^ -L. -lft
-all: libft/libft.a client server 
+	gcc -ggdb -c $^ -L. -lft
+all: libft.a client server 
 	./server
-client: $(CLIENTOBJ) $(UOBJS) libft/libft.a 
-	gcc -ggdb -fsanitize=address $(CLIENTOBJ) $(UOBJS) -L. -lft -o client 
+client: $(CLIENTOBJ) $(UOBJS) libft.a 
+	gcc -ggdb $(CLIENTOBJ) $(UOBJS) -L. -lft -o client 
 git:
 	git add $(CLIENTSRC) $(SERVERSRC) $(USRCS) Makefile $(HEADERS) ./libft
 server: $(SERVEROBJ) $(UOBJS) libft/libft.a 
-	gcc -ggdb -fsanitize=address $(SERVEROBJ) $(UOBJS) -L. -lft -o server 
+	gcc -ggdb $(SERVEROBJ) $(UOBJS) -L. -lft -o server 
 libft.a:
 	make -C libft bonus
 	mv libft/libft.a ./
