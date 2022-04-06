@@ -6,7 +6,7 @@
 /*   By: gmillon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 23:06:04 by gmillon           #+#    #+#             */
-/*   Updated: 2022/04/06 08:08:53 by gmillon          ###   ########.fr       */
+/*   Updated: 2022/04/06 20:54:59 by gmillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define LIBFT_H
 # include <stddef.h>
 # include <stdio.h>
-#include <unistd.h>
+# include <unistd.h>
+
 typedef struct s_list
 {
 	void			*content;

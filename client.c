@@ -6,7 +6,7 @@
 /*   By: gmillon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 23:06:15 by gmillon           #+#    #+#             */
-/*   Updated: 2022/04/06 20:38:38 by gmillon          ###   ########.fr       */
+/*   Updated: 2022/04/06 21:03:13 by gmillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	receive_str(int x)
 
 void	message_received(int x)
 {
-	ft_putstr_fd("Message sent successfully!", 1);
+	ft_putstr_fd("Message received successfully by server!", 1);
 }
 
 int	transmit_char(int c, int serverpid)
@@ -34,15 +34,9 @@ int	transmit_char(int c, int serverpid)
 	while (i >= 0)
 	{
 		if (check_bit(&c, i))
-		{
 			kill(serverpid, SIGUSR1);
-			write(1, "1", 1);
-		}
 		else
-		{
 			kill(serverpid, SIGUSR2);
-			write(1, "0", 1);
-		}
 		i--;
 		usleep(WAIT_TIME);
 	}
@@ -67,7 +61,6 @@ int	main(int argc, char **argv)
 	while (transmitstr[i])
 	{
 		transmit_char(transmitstr[i], serverpid);
-		// pause();
 		i++;
 	}
 	usleep(WAIT_TIME);
