@@ -2,7 +2,7 @@ USRCS = bitwise_operations.c conversion_utils.c
 UOBJS = $(USRCS:%.c=%.o)
 CLIENTSRC = client.c
 CLIENTOBJ = $(CLIENTSRC:%.c=%.o)
-SERVERSRC = server.c
+SERVERSRC = server_bonus.c
 SERVEROBJ = $(SERVERSRC:%.c=%.o)
 HEADERS = $(wildcard *.h)
 
