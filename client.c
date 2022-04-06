@@ -6,7 +6,7 @@
 /*   By: gmillon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 23:06:15 by gmillon           #+#    #+#             */
-/*   Updated: 2022/04/06 18:28:25 by gmillon          ###   ########.fr       */
+/*   Updated: 2022/04/06 20:38:38 by gmillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,22 @@ int	transmit_char(int c, int serverpid)
 
 	i = 7;
 	newaction.sa_handler = &receive_str;
-	sigaction(SIGUSR1, &newaction, NULL);
+	signal(SIGUSR1, SIG_IGN);
 	signal(SIGUSR2, &message_received);
 	while (i >= 0)
 	{
 		if (check_bit(&c, i))
 		{
 			kill(serverpid, SIGUSR1);
+			write(1, "1", 1);
 		}
 		else
 		{
 			kill(serverpid, SIGUSR2);
+			write(1, "0", 1);
 		}
 		i--;
-		pause();
+		usleep(WAIT_TIME);
 	}
 	return (1);
 }
@@ -65,8 +67,9 @@ int	main(int argc, char **argv)
 	while (transmitstr[i])
 	{
 		transmit_char(transmitstr[i], serverpid);
-		pause();
+		// pause();
 		i++;
 	}
+	usleep(WAIT_TIME);
 	transmit_char(255, serverpid);
 }
