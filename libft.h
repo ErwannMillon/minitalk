@@ -6,7 +6,7 @@
 /*   By: gmillon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 23:06:04 by gmillon           #+#    #+#             */
-/*   Updated: 2022/04/06 20:54:59 by gmillon          ###   ########.fr       */
+/*   Updated: 2022/04/10 17:42:19 by gmillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		ft_isupper(int c);
 void	*ft_memchr(const void *s, int c, size_t n);
 void	*ft_memset(void *dest, int c, size_t len);
 int		ft_memcmp(const void *p1, const void *p2, size_t size);
-void	*ft_memcpy(void *dest, const void * src, size_t n);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
 char	*ft_strchr(const char *str, int c);
 int		ft_strlen(const char *s);
 int		ft_strncmp(char *s1, char *s2, unsigned int n);
@@ -44,7 +44,7 @@ char	*ft_strnstr(char *str, char *to_find, size_t n);
 char	*ft_strrchr(char *str, int c);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
-size_t	ft_strlcpy(char * dest, const char *src, size_t size);
+size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 int		ft_strlcat(char *dest, char *src, size_t size);
 char	*ft_strdup(char *src);
 void	*ft_memmove(void *dest, const void *src, size_t len);
