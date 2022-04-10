@@ -5,17 +5,18 @@ CLIENTOBJ = $(CLIENTSRC:%.c=%.o)
 SERVERSRC = server.c
 SERVEROBJ = $(SERVERSRC:%.c=%.o)
 HEADERS = $(wildcard *.h)
+CLAGS = -Wall -Werror -Wextra
 
 %.o:%.c
-	gcc -ggdb -c $^ -L. -lft
+	gcc $(CFLAGS) -c $^ -L. -lft
 all: libft.a client server 
 	./server
 client: $(CLIENTOBJ) $(UOBJS) libft.a 
-	gcc -ggdb $(CLIENTOBJ) $(UOBJS) -L. -lft -o client 
+	gcc $(CFLAGS) $(CLIENTOBJ) $(UOBJS) -L. -lft -o client 
 git:
 	git add $(CLIENTSRC) $(SERVERSRC) $(USRCS) Makefile $(HEADERS) ./libft
 server: $(SERVEROBJ) $(UOBJS) libft/libft.a 
-	gcc -ggdb $(SERVEROBJ) $(UOBJS) -L. -lft -o server 
+	gcc $(CFLAGS) $(SERVEROBJ) $(UOBJS) -L. -lft -o server 
 libft.a:
 	make -C libft bonus
 	mv libft/libft.a ./
