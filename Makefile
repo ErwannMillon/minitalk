@@ -8,15 +8,15 @@ HEADERS = $(wildcard *.h)
 CFLAGS = -Wall -Werror -Wextra
 
 %.o:%.c
-	gcc $(CFLAGS) -c $^ -L. -lft
+	gcc $(CFLAGS) -c $^ -lft
 all: libft.a client server 
 	./server
 client: $(CLIENTOBJ) $(UOBJS) libft.a 
-	gcc $(CFLAGS) $(CLIENTOBJ) $(UOBJS) -L. -lft -o client 
+	gcc $(CFLAGS) $(CLIENTOBJ) $(UOBJS) -lft -o client 
 git:
 	git add $(CLIENTSRC) $(SERVERSRC) $(USRCS) Makefile $(HEADERS) ./libft
 server: $(SERVEROBJ) $(UOBJS) libft/libft.a 
-	gcc $(CFLAGS) $(SERVEROBJ) $(UOBJS) -L. -lft -o server 
+	gcc $(CFLAGS) $(SERVEROBJ) $(UOBJS) -lft -o server 
 libft.a:
 	make -C libft bonus
 	mv libft/libft.a ./
