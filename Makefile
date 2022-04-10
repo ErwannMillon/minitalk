@@ -5,7 +5,7 @@ CLIENTOBJ = $(CLIENTSRC:%.c=%.o)
 SERVERSRC = server.c
 SERVEROBJ = $(SERVERSRC:%.c=%.o)
 HEADERS = $(wildcard *.h)
-CLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 
 %.o:%.c
 	gcc $(CFLAGS) -c $^ -L. -lft
