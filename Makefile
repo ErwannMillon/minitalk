@@ -12,11 +12,11 @@ CFLAGS = -Wall -Werror -Wextra
 all: libft.a client server 
 	./server
 client: $(CLIENTOBJ) $(UOBJS) libft.a 
-	gcc $(CFLAGS) $(CLIENTOBJ) $(UOBJS) -lft -o client 
+	gcc $(CFLAGS) $(CLIENTOBJ) $(UOBJS) -L. -lft -o client 
 git:
 	git add $(CLIENTSRC) $(SERVERSRC) $(USRCS) Makefile $(HEADERS) ./libft
 server: $(SERVEROBJ) $(UOBJS) libft/libft.a 
-	gcc $(CFLAGS) $(SERVEROBJ) $(UOBJS) -lft -o server 
+	gcc $(CFLAGS) $(SERVEROBJ) $(UOBJS) -L. -lft -o server 
 libft.a:
 	make -C libft bonus
 	mv libft/libft.a ./

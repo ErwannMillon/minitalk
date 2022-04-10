@@ -6,7 +6,7 @@
 /*   By: gmillon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 23:05:53 by gmillon           #+#    #+#             */
-/*   Updated: 2022/04/06 20:57:43 by gmillon          ###   ########.fr       */
+/*   Updated: 2022/04/10 17:40:20 by gmillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	receive_char(int signum, siginfo_t *info, void *ucontext)
 	static int	i = 7;
 	static int	c = 0;
 
+	(void)ucontext;
 	if (signum == SIGUSR1)
 		set_bit(&c, i);
 	i--;

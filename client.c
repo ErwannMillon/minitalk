@@ -6,7 +6,7 @@
 /*   By: gmillon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 23:06:15 by gmillon           #+#    #+#             */
-/*   Updated: 2022/04/06 21:03:13 by gmillon          ###   ########.fr       */
+/*   Updated: 2022/04/10 17:38:37 by gmillon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	receive_str(int x)
 
 void	message_received(int x)
 {
+	(void)x;
 	ft_putstr_fd("Message received successfully by server!", 1);
 }
 
