@@ -8,7 +8,7 @@ HEADERS = $(wildcard *.h)
 CFLAGS = -Wall -Werror -Wextra
 
 %.o:%.c
-	gcc $(CFLAGS) -c $^ -lft
+	gcc $(CFLAGS) -c $^
 all: libft.a client server 
 	./server
 client: $(CLIENTOBJ) $(UOBJS) libft.a 
