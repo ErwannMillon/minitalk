@@ -7,7 +7,7 @@ SERVEROBJ = $(SERVERSRC:%.c=%.o)
 HEADERS = $(wildcard *.h)
 
 %.o:%.c
-	gcc -ggdb -c $^ -L. -lft
+	gcc -ggdb -c $^ 
 all: libft.a client server 
 	./server
 client: $(CLIENTOBJ) $(UOBJS) libft.a 
